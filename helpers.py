@@ -60,13 +60,11 @@ def assert_user_is_logged_in(driver):
     """Проверяет сохранение авторизации по кнопке «Оформить заказ» на главной."""
     driver.get(Urls.BASE_URL)
 
-    WebDriverWait(driver, WAIT_TIME).until(
+    assert WebDriverWait(driver, WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             MainPageLocators.ORDER_BUTTON
         )
-    )
-
-    assert driver.find_element(*MainPageLocators.ORDER_BUTTON).is_displayed()
+    ).is_displayed()
 
 
 def authorize_user(driver):
