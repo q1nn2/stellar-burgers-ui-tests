@@ -5,7 +5,7 @@ from data import COHORT_NUMBER, EMAIL_DOMAIN
 
 
 def generate_login():
-    number = random.randint(100, 999)
+    number = random.randint(1000, 9999)
     return f"anatoly_el_{COHORT_NUMBER}_{number}@{EMAIL_DOMAIN}"
 
 
