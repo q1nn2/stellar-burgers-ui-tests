@@ -8,3 +8,7 @@ class UserData:
     COHORT_NUMBER = 53
     USER_NAME = "Анатолий"
     EMAIL_DOMAIN = "yandex.ru"
+
+
+class Timeouts:
+    WAIT_TIME = 10

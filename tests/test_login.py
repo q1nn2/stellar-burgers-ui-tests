@@ -1,11 +1,9 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from data import Urls
+from data import Timeouts, Urls
 from helpers import assert_user_is_logged_in, login
 from locators import AuthLocators, MainPageLocators
-
-WAIT_TIME = 10
 
 
 class TestLogin:
@@ -25,7 +23,7 @@ class TestLogin:
         driver.get(Urls.BASE_URL)
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-        WebDriverWait(driver, WAIT_TIME).until(
+        WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.visibility_of_element_located(
                 AuthLocators.LOGIN_TITLE
             )
@@ -39,7 +37,7 @@ class TestLogin:
 
         driver.get(Urls.REGISTER_URL)
 
-        WebDriverWait(driver, WAIT_TIME).until(
+        WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.element_to_be_clickable(AuthLocators.LOGIN_LINK)
         ).click()
 
@@ -51,7 +49,7 @@ class TestLogin:
 
         driver.get(Urls.FORGOT_PASSWORD_URL)
 
-        WebDriverWait(driver, WAIT_TIME).until(
+        WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.element_to_be_clickable(AuthLocators.LOGIN_LINK)
         ).click()
 

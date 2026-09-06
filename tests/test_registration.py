@@ -1,11 +1,9 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from data import Urls, UserData
+from data import Timeouts, Urls, UserData
 from generators import generate_login, generate_password
 from locators import AuthLocators, RegistrationLocators
-
-WAIT_TIME = 10
 
 
 class TestRegistration:
@@ -16,7 +14,7 @@ class TestRegistration:
 
         driver.get(Urls.REGISTER_URL)
 
-        WebDriverWait(driver, WAIT_TIME).until(
+        WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.visibility_of_element_located(
                 RegistrationLocators.NAME_INPUT
             )
@@ -31,7 +29,7 @@ class TestRegistration:
         )
         driver.find_element(*RegistrationLocators.REGISTER_BUTTON).click()
 
-        assert WebDriverWait(driver, WAIT_TIME).until(
+        assert WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.visibility_of_element_located(
                 AuthLocators.LOGIN_TITLE
             )
@@ -43,7 +41,7 @@ class TestRegistration:
 
         driver.get(Urls.REGISTER_URL)
 
-        WebDriverWait(driver, WAIT_TIME).until(
+        WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.visibility_of_element_located(
                 RegistrationLocators.NAME_INPUT
             )
@@ -58,7 +56,7 @@ class TestRegistration:
         )
         driver.find_element(*RegistrationLocators.REGISTER_BUTTON).click()
 
-        assert WebDriverWait(driver, WAIT_TIME).until(
+        assert WebDriverWait(driver, Timeouts.WAIT_TIME).until(
             expected_conditions.visibility_of_element_located(
                 RegistrationLocators.PASSWORD_ERROR
             )
