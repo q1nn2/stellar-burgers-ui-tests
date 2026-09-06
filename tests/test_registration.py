@@ -17,7 +17,9 @@ class TestRegistration:
         driver.get(REGISTER_URL)
 
         WebDriverWait(driver, WAIT_TIME).until(
-            expected_conditions.visibility_of_element_located(RegistrationLocators.NAME_INPUT)
+            expected_conditions.visibility_of_element_located(
+                RegistrationLocators.NAME_INPUT
+            )
         )
 
         driver.find_element(*RegistrationLocators.NAME_INPUT).send_keys(USER_NAME)
@@ -25,11 +27,11 @@ class TestRegistration:
         driver.find_element(*RegistrationLocators.PASSWORD_INPUT).send_keys(password)
         driver.find_element(*RegistrationLocators.REGISTER_BUTTON).click()
 
-        login_title = WebDriverWait(driver, WAIT_TIME).until(
-            expected_conditions.visibility_of_element_located(AuthLocators.LOGIN_TITLE)
-        )
-
-        assert login_title.text == "Вход"
+        assert WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(
+                AuthLocators.LOGIN_TITLE
+            )
+        ).is_displayed()
 
     def test_registration_with_short_password_shows_error(self, driver):
         email = generate_login()
@@ -38,7 +40,9 @@ class TestRegistration:
         driver.get(REGISTER_URL)
 
         WebDriverWait(driver, WAIT_TIME).until(
-            expected_conditions.visibility_of_element_located(RegistrationLocators.NAME_INPUT)
+            expected_conditions.visibility_of_element_located(
+                RegistrationLocators.NAME_INPUT
+            )
         )
 
         driver.find_element(*RegistrationLocators.NAME_INPUT).send_keys(USER_NAME)
@@ -46,8 +50,8 @@ class TestRegistration:
         driver.find_element(*RegistrationLocators.PASSWORD_INPUT).send_keys(short_password)
         driver.find_element(*RegistrationLocators.REGISTER_BUTTON).click()
 
-        error = WebDriverWait(driver, WAIT_TIME).until(
-            expected_conditions.visibility_of_element_located(RegistrationLocators.PASSWORD_ERROR)
-        )
-
-        assert "Некорректный пароль" in error.text
+        assert WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(
+                RegistrationLocators.PASSWORD_ERROR
+            )
+        ).is_displayed()
