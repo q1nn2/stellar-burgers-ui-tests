@@ -50,9 +50,7 @@ def login(driver, email, password):
     driver.find_element(*AuthLocators.LOGIN_BUTTON).click()
 
     WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.invisibility_of_element_located(
-            AuthLocators.LOGIN_BUTTON
-        )
+        expected_conditions.url_to_be(Urls.BASE_URL)
     )
 
 
