@@ -55,3 +55,18 @@ def assert_user_is_logged_in(driver):
     )
 
     assert driver.find_element(*MainPageLocators.ORDER_BUTTON).is_displayed()
+
+
+def authorize_user(driver):
+    email, password = register_new_user(driver)
+    login(driver, email, password)
+    driver.get(BASE_URL)
+
+
+def wait_constructor(driver):
+    driver.get(BASE_URL)
+    WebDriverWait(driver, WAIT_TIME).until(
+        expected_conditions.visibility_of_element_located(
+            MainPageLocators.CONSTRUCTOR_TITLE
+        )
+    )

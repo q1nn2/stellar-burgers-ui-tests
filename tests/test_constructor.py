@@ -1,17 +1,5 @@
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
-
-from data import BASE_URL
+from helpers import wait_constructor
 from locators import MainPageLocators
-
-WAIT_TIME = 10
-
-
-def wait_constructor(driver):
-    driver.get(BASE_URL)
-    WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(MainPageLocators.CONSTRUCTOR_TITLE)
-    )
 
 
 def test_switch_to_buns_section(driver):

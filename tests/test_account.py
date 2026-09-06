@@ -1,17 +1,10 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from data import BASE_URL
-from helpers import login, register_new_user
+from helpers import authorize_user
 from locators import AccountLocators, AuthLocators, MainPageLocators
 
 WAIT_TIME = 10
-
-
-def authorize_user(driver):
-    email, password = register_new_user(driver)
-    login(driver, email, password)
-    driver.get(BASE_URL)
 
 
 def test_open_personal_account(driver):
