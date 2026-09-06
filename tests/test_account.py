@@ -14,11 +14,11 @@ class TestAccount:
 
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-        logout_button = WebDriverWait(driver, WAIT_TIME).until(
-            expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
-        )
-
-        assert logout_button.is_displayed()
+        assert WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(
+                AccountLocators.LOGOUT_BUTTON
+            )
+        ).is_displayed()
 
     def test_go_from_account_to_constructor_by_constructor_link(self, driver):
         authorize_user(driver)
