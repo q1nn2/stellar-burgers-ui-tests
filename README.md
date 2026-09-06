@@ -36,8 +36,6 @@ pip install -r requirements.txt
 
 Google Chrome должен быть установлен. Selenium Manager автоматически подберёт драйвер для Chrome.
 
-Перед запуском открой `data.py` и замени `COHORT_NUMBER = 25` на номер своей когорты.
-
 ## Запуск
 
 ```bash
