@@ -1,12 +1,15 @@
 import random
 import string
 
-from data import COHORT_NUMBER, EMAIL_DOMAIN
+from data import UserData
 
 
 def generate_login():
     number = random.randint(1000, 9999)
-    return f"anatoly_el_{COHORT_NUMBER}_{number}@{EMAIL_DOMAIN}"
+    return (
+        f"anatoly_el_{UserData.COHORT_NUMBER}_{number}"
+        f"@{UserData.EMAIL_DOMAIN}"
+    )
 
 
 def generate_password(length=8):
