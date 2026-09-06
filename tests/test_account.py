@@ -7,65 +7,64 @@ from locators import AccountLocators, AuthLocators, MainPageLocators
 WAIT_TIME = 10
 
 
-def test_open_personal_account(driver):
-    authorize_user(driver)
+class TestAccount:
 
-    driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
+    def test_open_personal_account(self, driver):
+        authorize_user(driver)
 
-    logout_button = WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
-    )
+        driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-    assert logout_button.is_displayed()
+        logout_button = WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
+        )
 
+        assert logout_button.is_displayed()
 
-def test_go_from_account_to_constructor_by_constructor_link(driver):
-    authorize_user(driver)
+    def test_go_from_account_to_constructor_by_constructor_link(self, driver):
+        authorize_user(driver)
 
-    driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
+        driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-    WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
-    )
+        WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
+        )
 
-    driver.find_element(*MainPageLocators.CONSTRUCTOR_LINK).click()
+        driver.find_element(*MainPageLocators.CONSTRUCTOR_LINK).click()
 
-    title = WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(MainPageLocators.CONSTRUCTOR_TITLE)
-    )
+        title = WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(MainPageLocators.CONSTRUCTOR_TITLE)
+        )
 
-    assert "Соберите бургер" in title.text
+        assert "Соберите бургер" in title.text
 
+    def test_go_from_account_to_constructor_by_logo(self, driver):
+        authorize_user(driver)
 
-def test_go_from_account_to_constructor_by_logo(driver):
-    authorize_user(driver)
+        driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-    driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
+        WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
+        )
 
-    WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(AccountLocators.LOGOUT_BUTTON)
-    )
+        driver.find_element(*MainPageLocators.LOGO).click()
 
-    driver.find_element(*MainPageLocators.LOGO).click()
+        title = WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(MainPageLocators.CONSTRUCTOR_TITLE)
+        )
 
-    title = WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(MainPageLocators.CONSTRUCTOR_TITLE)
-    )
+        assert "Соберите бургер" in title.text
 
-    assert "Соберите бургер" in title.text
+    def test_logout_from_personal_account(self, driver):
+        authorize_user(driver)
 
+        driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
 
-def test_logout_from_personal_account(driver):
-    authorize_user(driver)
+        WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.element_to_be_clickable(AccountLocators.LOGOUT_BUTTON)
+        ).click()
 
-    driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_LINK).click()
+        login_title = WebDriverWait(driver, WAIT_TIME).until(
+            expected_conditions.visibility_of_element_located(AuthLocators.LOGIN_TITLE)
+        )
 
-    WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.element_to_be_clickable(AccountLocators.LOGOUT_BUTTON)
-    ).click()
-
-    login_title = WebDriverWait(driver, WAIT_TIME).until(
-        expected_conditions.visibility_of_element_located(AuthLocators.LOGIN_TITLE)
-    )
-
-    assert login_title.text == "Вход"
+        assert login_title.text == "Вход"
