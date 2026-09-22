@@ -1,11 +1,9 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from data import Urls, UserData
+from data import Timeouts, Urls, UserData
 from generators import generate_login, generate_password
 from locators import AuthLocators, MainPageLocators, RegistrationLocators
-
-WAIT_TIME = 10
 
 
 def register_new_user(driver):
@@ -15,7 +13,7 @@ def register_new_user(driver):
 
     driver.get(Urls.REGISTER_URL)
 
-    WebDriverWait(driver, WAIT_TIME).until(
+    WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             RegistrationLocators.NAME_INPUT
         )
@@ -28,7 +26,7 @@ def register_new_user(driver):
     driver.find_element(*RegistrationLocators.PASSWORD_INPUT).send_keys(password)
     driver.find_element(*RegistrationLocators.REGISTER_BUTTON).click()
 
-    WebDriverWait(driver, WAIT_TIME).until(
+    WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             AuthLocators.LOGIN_TITLE
         )
@@ -39,7 +37,7 @@ def register_new_user(driver):
 
 def login(driver, email, password):
     """Вводит email и пароль в открытую форму входа."""
-    WebDriverWait(driver, WAIT_TIME).until(
+    WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             AuthLocators.EMAIL_INPUT
         )
@@ -49,7 +47,7 @@ def login(driver, email, password):
     driver.find_element(*AuthLocators.PASSWORD_INPUT).send_keys(password)
     driver.find_element(*AuthLocators.LOGIN_BUTTON).click()
 
-    WebDriverWait(driver, WAIT_TIME).until(
+    WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.url_to_be(Urls.BASE_URL)
     )
 
@@ -58,7 +56,7 @@ def assert_user_is_logged_in(driver):
     """Проверяет сохранение авторизации по кнопке «Оформить заказ» на главной."""
     driver.get(Urls.BASE_URL)
 
-    assert WebDriverWait(driver, WAIT_TIME).until(
+    assert WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             MainPageLocators.ORDER_BUTTON
         )
@@ -73,7 +71,7 @@ def authorize_user(driver):
 
 def wait_constructor(driver):
     driver.get(Urls.BASE_URL)
-    WebDriverWait(driver, WAIT_TIME).until(
+    WebDriverWait(driver, Timeouts.WAIT_TIME).until(
         expected_conditions.visibility_of_element_located(
             MainPageLocators.CONSTRUCTOR_TITLE
         )
